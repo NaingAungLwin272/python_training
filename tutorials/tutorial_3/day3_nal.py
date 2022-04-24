@@ -1,4 +1,4 @@
-# 1
+#  1
 number1 = 10
 number2 = 40
 product = number1 * number2
@@ -10,7 +10,8 @@ else:
     syntax = "The result is {}"
     print(syntax.format(result))
 
-# 2
+
+#  2
 arr1 = [1, 2, 3, 4, 5]
 arr2 = [4, 5, 7, 9, 10]
 

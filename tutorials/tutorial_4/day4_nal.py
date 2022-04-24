@@ -8,16 +8,14 @@ print(list(cube_list))
 
 
 #   2
-n = 5
-for i in range(0, n):
-    for j in range(0, i+1):
-        print("* ", end="")
+def star_function(x):
+    n = 5
+    for i in range(0, n):
+        for j in range(0, i+1):
+            print(x, end="")
 
-    print("\r")
+        print("\r")
 
-n = 5
-for i in range(0, n):
-    for j in range(0, i+1):
-        print("? ", end="")
 
-    print("\r")
+star_function("* ")
+star_function("? ")

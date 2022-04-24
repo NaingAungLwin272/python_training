@@ -4,6 +4,7 @@ y = 6
 z = x * y
 print(z)
 
+
 # 2
 greet = "Hello"
 syntax = "This is Day2 Assignment."
