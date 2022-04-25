@@ -22,7 +22,7 @@ word_count()
 
 
 #   3
-number = input("Enter a number: ")
+number = input("Enter a number:: ")
 try:
     value = int(number)
     if value < 0:
