@@ -1,20 +1,25 @@
 #   1
 class Person:
     def __init__(self, fname, lname):
-        self.firstname = fname
-        self.lastname = lname
+        self.fname = fname
+        self.lname = lname
 
     def pname(self):
-        print(self.firstname)
+        print("First name of employee is " + self.fname)
+
+
+p = Person("Aung", "Naing Lwin")
+p.pname()
 
 
 class Employee(Person):
+
     def __init__(self, fname, lname):
         super().__init__(fname, lname)
 
 
-p = Employee("Naing", "Aung Lwin")
-p.pname()
+emp = Employee("Naing", "Aung Lwin")
+emp.pname()
 
 
 #   2
