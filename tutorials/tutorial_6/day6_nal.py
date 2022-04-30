@@ -8,18 +8,14 @@ class Person:
         print("First name of employee is " + self.fname)
 
 
-p = Person("Aung", "Naing Lwin")
-p.pname()
+emp = Person("Naing", "Aung Lwin")
+emp.pname()
 
 
 class Employee(Person):
 
     def __init__(self, fname, lname):
         super().__init__(fname, lname)
-
-
-emp = Employee("Naing", "Aung Lwin")
-emp.pname()
 
 
 #   2
