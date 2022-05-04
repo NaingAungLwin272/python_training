@@ -170,7 +170,7 @@ def calculate():
             result = num1 ** 3
             print("Cube of {} ".format(num1), "= ", result)
         else:
-            print("Check your Operation Input again")
+            print("Invalid Input.Please Enter A Valid One")
             print("---------------------------------------")
             continue
 
