@@ -28,14 +28,14 @@ def calculate():
                             num2 = float(input("Enter Second Number : "))
                             break
                         except ValueError:
-                            print("Valid number pls")
+                            print("Check your Number Input again")
                             print("---------------------------------------")
 
                     result = num1 + num2
                     print(" {} + {} ".format(num1, num2), "= ", result)
                     break
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number again")
                     print("---------------------------------------")
 
         elif user_input.lower() == "subtract" or user_input == "2":
@@ -47,14 +47,14 @@ def calculate():
                             num2 = float(input("Enter Second Number : "))
                             break
                         except ValueError:
-                            print("Valid number pls")
+                            print("Check your Number Input again")
                             print("---------------------------------------")
 
                     result = num1 - num2
                     print(" {} + {} ".format(num1, num2), "= ", result)
                     break
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number Input again")
                     print("---------------------------------------")
 
         elif user_input.lower() == "multiply" or user_input == "3":
@@ -66,14 +66,14 @@ def calculate():
                             num2 = float(input("Enter Second Number : "))
                             break
                         except ValueError:
-                            print("Valid number pls")
+                            print("Check your Number Input again")
                             print("---------------------------------------")
 
                     result = num1 * num2
                     print(" {} + {} ".format(num1, num2), "= ", result)
                     break
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number  Input again")
                     print("---------------------------------------")
         elif user_input.lower() == "divided" or user_input == "4":
 
@@ -85,53 +85,61 @@ def calculate():
                             num2 = float(input("Enter Second Number : "))
                             break
                         except ValueError:
-                            print("Valid number pls")
+                            print("Check your Number  Input again")
                             print("---------------------------------------")
 
                     result = num1 / num2
                     print(" {} / {} ".format(num1, num2), "= ", result)
                     break
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number Input again")
                     print("---------------------------------------")
 
         elif user_input.lower() == "power" or user_input == "5":
 
-            try:
-                num1 = float(input("Enter First Number : "))
-                while True:
-                    try:
-                        num2 = float(input("Enter Second Number : "))
-                        break
-                    except ValueError:
-                        print("Valid number pls")
-                        print("---------------------------------------")
+            while True:
+                try:
+                    num1 = float(input("Enter First number:"))
 
-                result = math.pow(num1, num2)
-                print(" {} ** {} ".format(num1, num2), "= ", result)
-                break
-            except ValueError:
-                print("Valid number pls")
-                print("---------------------------------------")
+                    while True:
+                        try:
+                            num2 = float(input("Enter Second number:"))
+                            break
+                        except ValueError:
+
+                            print("Check your Number Input Again")
+                            print("---------------------------------------")
+
+                    result = math.pow(num1, num2)
+                    print(" {} ** {} ".format(num1, num2), "= ", result)
+                    break
+                except ValueError:
+
+                    print("Check your Number Input again")
+                    print("---------------------------------------")
 
         elif user_input.lower() == "modulo" or user_input == "6":
 
-            try:
-                num1 = float(input("Enter First Number : "))
-                while True:
-                    try:
-                        num2 = float(input("Enter Second Number : "))
-                        break
-                    except ValueError:
-                        print("Valid number pls")
-                        print("---------------------------------------")
+            while True:
+                try:
+                    num1 = float(input("Enter First number:"))
 
-                result = num1 % num2
-                print(" {} % {} ".format(num1, num2), "= ", result)
-                break
-            except ValueError:
-                print("Valid number pls")
-                print("---------------------------------------")
+                    while True:
+                        try:
+                            num2 = float(input("Enter Second number:"))
+                            break
+                        except ValueError:
+
+                            print("Check your Number Input Again")
+                            print("---------------------------------------")
+
+                    result = num1 % num2
+                    print(" {} % {} ".format(num1, num2), "= ", result)
+                    break
+                except ValueError:
+
+                    print("Check your Number Input again")
+                    print("---------------------------------------")
 
         elif user_input.lower() == "squareroot" or user_input == "7":
             while True:
@@ -141,7 +149,7 @@ def calculate():
                     break
 
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number Input again")
                     print("---------------------------------------")
 
             result = math.sqrt(num1)
@@ -156,13 +164,13 @@ def calculate():
                     break
 
                 except ValueError:
-                    print("Valid number pls")
+                    print("Check your Number Input again")
                     print("---------------------------------------")
 
             result = num1 ** 3
             print("Cube of {} ".format(num1), "= ", result)
         else:
-            print("Check your UserChoice again")
+            print("Check your Operation Input again")
             print("---------------------------------------")
             continue
 
@@ -181,7 +189,7 @@ def again():
         print("---------------------------------------")
 
     else:
-        print("Invalid Input")
+        print("Choose only yes or no")
         print("---------------------------------------")
         again()
 
