@@ -11,7 +11,7 @@ while True:
         input("Let`s start! Rock Paper or Scissors?: "))
 
     while user_input.lower() != 'rock' and user_input.lower() != 'paper' and user_input.lower() != 'scissors':
-        user_input = input("Wrong Choice!Choice Again Please : ")
+        user_input = input("Invalid Input.Input A Valid One Please : ")
 
     random_computer = random.randint(0, 2)
     if random_computer == 0:
@@ -60,7 +60,7 @@ while True:
     restart = input("Play Again!(Y,N) ")
 
     while restart.lower() != "y" and restart.lower() != "n":
-        restart = input("Choose Y or N only.Input Again : ")
+        restart = input("Invalid Input.Input Y or N only :  ")
     if restart.lower() == 'n':
         print("Bye Bye!! See you next time")
         break
