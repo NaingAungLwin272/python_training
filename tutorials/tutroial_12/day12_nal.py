@@ -9,7 +9,7 @@ def count_time():
             "Enter 1 for Count Up Timer and Enter 2 for Count Down Timer : "))
 
         while user_choice != '1' and user_choice != '2':
-            print(" ")
+            print(" Invalid Input ")
             user_choice = input(" 1 For CountUp or 2 For CountDown : ")
             print(" ")
 
@@ -30,6 +30,8 @@ def count_time():
 
                     if end < start:
                         print("End Time must be Greater than Start time")
+                    elif start < 0 or end < 0:
+                        print("Invalid Time Input.Input can`t be negative.")
                     else:
                         for x in range(start, end):
 
@@ -66,6 +68,8 @@ def count_time():
 
                     if end > start:
                         print("End time must be Less than Start time")
+                    elif start < 0 or end < 0:
+                        print("Invalid Time Input.Input can`t be negative.")
                     else:
                         for x in range(start, end, -1):
                             hour = x // 3600
