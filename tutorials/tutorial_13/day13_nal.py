@@ -1,51 +1,58 @@
 import random
 
-count = 3
-print("Welcome from our Number Guessing Game ")
-while True:
+print("Welcome from our Number Guessing Game")
+
+
+def guessing_game():
+    count = 3
     num = random.randint(0, 10)
+    print(num)
 
-    try:
-        user_input = int(input("Enter Number : "))
-        print(" ")
-    except ValueError:
-        print("Invaild Input.Input Valid Number Again.")
-        print(" ")
-        continue
+    while True:
 
-    else:
-        if user_input == num:
-            print("U Won")
-        elif user_input < 0:
+        try:
+            user_input = int(input("Enter Number : "))
             print(" ")
-            print("Invalid Input.Input Can`t be Negative. ")
+        except ValueError:
+            print("Invaild Input.Input Valid Number Again.")
             print(" ")
             continue
-        elif user_input > 11:
-            print(" ")
-            print("Invalid Input.Guess number between 0 to 10")
-            print(" ")
-            continue
+
         else:
-            if count != 1:
-                count -= 1
+            if user_input == num:
+                print("U Won")
+            elif user_input < 0:
                 print(" ")
-                print("Try Again.You have {} time left to guess.".format(count))
+                print("Invalid Input.Input Can`t be Negative. ")
+                print(" ")
+                continue
+            elif user_input > 10:
+                print(" ")
+                print("Invalid Input.Guess number between 0 to 10")
+                print(" ")
                 continue
             else:
-                print("You lost.You have no time left to guess number.")
-                count = 3
-    print("The Number is {} ".format(num))
-    print(" ")
-    again = input("Do you want to play again?(Y/N) : ")
-    print(" ")
-    while again.lower() != 'y' and again.lower() != 'n':
-        print(" ")
-        again = input("Invalid Input.Input Y or N only : ")
-        print(" ")
-        continue
+                if count != 1:
+                    count -= 1
+                    print(" ")
+                    print("Try Again.You have {} time left to guess.".format(count))
+                    continue
+                else:
+                    print("You lost.You have no time left to guess number.")
 
-    if again == 'n':
+        again()
+
+
+def again():
+    user_again = str(input("Let's play next game?? (Y/N)"))
+    print(" ")
+    if user_again.lower() == "y":
+        guessing_game()
+    elif user_again.lower() == "n":
         print("Bye Bye")
-        print("--------------------------------")
-        break
+    else:
+        print("Please enter Y or N only ")
+        again()
+
+
+guessing_game()
