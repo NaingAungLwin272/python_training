@@ -1,0 +1,20 @@
+p{
+  font-size:20px;
+
+}
+input{
+  opacity:0.5;
+}
+.btn{
+  width:150px;
+  height:40px;
+  margin-top:10px;
+  border:none;
+  background-color:#A020F0;
+  color:#fff;
+  font-size:16px;
+  border-radius:0.2em;
+}
+.error{
+  color:#FF0000;
+}
