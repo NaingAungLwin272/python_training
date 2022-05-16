@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, request, url_for
 app = Flask(__name__)
 
 
@@ -14,7 +14,7 @@ def login():
         if user.lower() == 'mth':
             return redirect(url_for('success', name=user))
         else:
-            return "Unauthorized User"
+            return 'Unauthorized User'
     else:
         user = request.args.get('name')
         return redirect(url_for('success', name=user))
