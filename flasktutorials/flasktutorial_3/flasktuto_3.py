@@ -16,7 +16,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         confirmpword = request.form['confirmpassword']
-        if len(username) == 0 or len(password) == 0 or len(email) == 0 or len(confirmpword) == 0:
+        if username == '' or password == '' or email == '' or confirmpword == '':
             error = 'Input Can`t be blank'
         else:
             return redirect(url_for('welcome'))
