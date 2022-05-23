@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Confirm </title>
+</head>
+
+<body>
+  <form action="" method="POST" enctype="multipart/form-data">
+    <p>Name: <label for="name">{{ name }}</label> </p>
+
+    <p>Email:<label for=" email">{{ email }}
+      </label></p>
+
+    <p>Password:<label for="password">{{ password }}
+      </label></p>
+
+    <p>Phone:<label for="phone">{{ phone }}
+      </label></p>
+
+    <p>Date of Birth:<label for="dob">{{ dob }}
+      </label></p>
+
+    <p>Address:<label for="address">{{ address }}
+      </label></p>
+
+
+    {% if profile %}
+    <h1>some text <img src="{{ url_for('user_confirm', profile=profile) }}">more text!</h1>
+    {% endif %}
+
+    <p><input type="submit" value="Confirm"></p>
+</body>
+
+</html>
