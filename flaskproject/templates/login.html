@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Login</title>
+</head>
+
+<body>
+
+
+
+  <div class="container">
+    <form action="" method="post" class="form-horizontal">
+
+      <h1>Login Form</h1>
+      <br>
+      {% if loginerror %}
+      <p class="error text-danger"><strong>Error:</strong> {{ loginerror }}
+        {% elif msg %}
+      <p class="error text-danger"><strong>Error:</strong> {{ msg }}
+        {% endif %}
+      <div class="form-group">
+        <label class="col-sm-1">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-1">Password</label>
+        <div class="col-sm-10">
+          <input type="password" name="password" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="submit" value="Login" class="btn btn-primary btn-md">
+    </form>
+  </div>
+
+</body>
+
+</html>
