@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Create Page</title>
+  <style>
+    .btn {
+      margin-left: 20px;
+      margin-top: 10px;
+      cursor: pointer;
+
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'navbar.html'%}
+
+
+  <div class="container">
+    <h1>User Update</h1>
+    <br>
+
+    <form action="" name="form" method="post" enctype="multipart/form-data" class="form-horizontal" id="form">
+      {% for item in data %}
+      {% if erroruser %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ erroruser }}
+        {% endif %}
+      <div class="form-group">
+        <label class="col-sm-1">Username</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="name" value="{{ item[1] }}">
+        </div>
+      </div>
+      {% if erroremail %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ erroremail }}
+        {% endif %}
+      <div class=" form-group">
+
+        <label class="col-sm-1">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="email" value="{{ item[2] }}">
+        </div>
+      </div>
+
+      <div class=" form-group">
+
+        <label class="col-sm-1" for="user">Type</label>
+        <div class="col-sm-10">
+          <select name="user" id="user" class="form-select" aria-label="Default select example">
+            <option value="0">Admin</option>
+            <option value="1" selected>User</option>
+
+          </select>
+        </div>
+
+
+      </div>
+
+
+
+      {% if errorphone %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ errorphone }}
+        {% endif %}
+
+        {% if phoneerror %}
+      <p class="error text-danger"><strong>Error:</strong> {{ phoneerror }}
+        {% endif %}
+      <div class="form-group">
+
+        <label class="col-sm-1">Phone</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="phone" value="{{ item[4] }}">
+        </div>
+      </div>
+      {% if errordob %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ errordob }}
+        {% endif %}
+      <div class="form-group">
+        <label class="col-sm-1">Date of Birth</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" name="dob" value="{{item[6]}}">
+        </div>
+      </div>
+      {% if erroraddress %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ erroraddress }}
+        {% endif %}
+      <div class="form-group">
+        <label class="col-sm-1">Address</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="3" name="address">{{item[5]}}</textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <div class="col-sm-offset-1 col-sm-10">
+
+            <input type="submit" value="Confirm" class="btn btn-primary btn-md" name="btn">
+
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-sm-offset-1 col-sm-10">
+
+            <input type="reset" value="Clear" class="btn btn-primary btn-md" name="btn">
+
+
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+
+    </form>
+  </div>
+
+
+
+</body>
+
+</html>

@@ -5,62 +5,204 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <title>User Create Page</title>
+  <style>
+    .column {
+      float: left;
+
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .btn {
+      margin-left: 90px;
+      margin-top: 10px;
+      cursor: pointer;
+
+    }
+
+    .container {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 
 <body>
-  {% if error %}
-  <p class="error"><strong>Error:</strong> {{ error }}
-    {% elif errorpass %}
-  <p class="error">{{ errorpass }}</p>
-  {% elif phoneerror %}
-  <p class="error">{{ phoneerror}}</p>
-  {% endif %}
-  </p>
-  <form action="" name="" method="post" enctype="multipart/form-data">
-    <p>Username</p>
-    <input type="text" name="name" />
 
-    <p>Email</p>
-    <input type="email" name="email" />
 
-    <p>Password</p>
-    <input type="password" name="password" />
+  <div class="container">
+    <h1>User Create</h1>
+    <br>
 
-    <p>Confirm Password</p>
-    <input type="password" name="confirmpass">
+    <form action="" name="form" method="post" enctype="multipart/form-data" class="form-horizontal" id="form">
+      {% if erroruser %}
+      <p class=" error text-danger"><strong>Error:</strong> {{ erroruser }}
+        {% endif %}
+      <div class="form-group">
 
-    <!--<p>
+        <label class="col-sm-1">Username</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="name">
+        </div>
+      </div>
+      {% if erroremail %}
+      <p class="error text-danger"><strong>Error:</strong> {{ erroremail }}
+        {% endif %}
+      <div class="form-group">
 
-      <label for="user">Type</label>
+        <label class="col-sm-1">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="email">
+        </div>
+      </div>
+      {% if passerror %}
+      <p class="error text-danger"><strong>Error:</strong> {{ passerror }}
+        {% endif %}
 
-      <select name="user" id="user">
-        <option value="admin">Admin</option>
-        <option value="user">User</option>
+        {% if errorpass %}
+      <p class="error text-danger"><strong>Error:</strong> {{ errorpass }}
+        {% endif %}
+      <div class="form-group">
 
-      </select>
-    </p>-->
+        <label class="col-sm-1">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" name="password">
+        </div>
+      </div>
 
-    <p>Phone</p>
-    <input type="text" name="phone">
+      {% if conpasserror %}
+      <p class="error text-danger"><strong>Error:</strong> {{ conpasserror }}
+        {% endif %}
 
-    <p>Date of Birth</p>
-    <input type="date" name="dob">
+        {% if errorconpass %}
+      <p class="error text-danger"><strong>Error:</strong> {{ errorconpass }}
+        {% endif %}
+      <div class="form-group">
 
-    <p>Address</p>
-    <textarea name="address" id="" cols="30" rows="10"></textarea>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <p>Profile</p>
-    <input type="file" name="profile">
 
-    <p><button type="submit" class="btn">Submit</button></p>
-  </form>
+        <label class="col-sm-1">Confirm Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" name="confirmpass">
+        </div>
+      </div>
+
+      <p>
+
+      <div class="form-group">
+
+        <label class="col-sm-1" for="user">Type</label>
+        <div class="col-sm-10">
+          <select name="user" id="user" class="form-select" aria-label="Default select example">
+            <option value="0">Admin</option>
+            <option value="1" selected>User</option>
+
+          </select>
+        </div>
+
+
+      </div>
+
+
+      {% if errorphone %}
+      <p class="error text-danger"><strong>Error:</strong> {{ errorphone }}
+
+
+        {% endif %}
+
+        {% if phoneerror %}
+      <p class="error text-danger"><strong>Error:</strong> {{ phoneerror }}
+        {% endif %}
+
+
+      <div class="form-group">
+
+        <label class="col-sm-1">Phone</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="phone">
+        </div>
+      </div>
+      {% if errordob %}
+      <p class="error text-danger"><strong>Error:</strong> {{ errordob }}
+        {% endif %}
+
+      <div class="form-group">
+        <label class="col-sm-1">Date of Birth</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" name="dob">
+        </div>
+      </div>
+      {% if erroraddress %}
+      <p class="error text-danger"><strong>Error:</strong> {{ erroraddress }}
+        {% endif %}
+      <div class="form-group">
+        <label class="col-sm-1">Address</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="3" name="address"></textarea>
+        </div>
+      </div>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="error text-danger"><strong>Error:</strong> {{ message }}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      <div class="form-group">
+        <label class="col-sm-1">Profile</label>
+        <div class="col-sm-10">
+          <input type="file" name="profile">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <div class="col-sm-offset-1 col-sm-10">
+
+            <input type="submit" value="Confirm" class="btn btn-primary btn-md" name="btn">
+
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-sm-offset-1 col-sm-10">
+
+            <input type="reset" value="Clear" class="btn btn-primary btn-md" name="btn">
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+    </form>
+  </div>
+
+
+  <script>
+    $("#form").submit(function (e) {
+      loadAjax();
+      e.returnValue = false;
+    });
+  </script>
 </body>
 
 </html>

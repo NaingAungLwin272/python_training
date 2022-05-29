@@ -5,59 +5,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>User lists </title>
 </head>
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
 
-  td,
-  th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-</style>
 
 <body>
-  <table cellpadding="5" cellspacing="5">
+
+  {% include 'navbar.html'%}
+
+  <table class="table table-striped">
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Phone</th>
-      <th>Address</th>
-      <th>Day of Birth</th>
-      <th>Created Date</th>
-      <th>Updated Date</th>
+
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">Dat of Birth</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Updated Date</th>
+      <th scope="col">Type</th>
+      <th scope="col">Delete</th>
     </tr>
-    {% for item in data %}
+    {% for item in data%}
 
     <tr>
 
-      <td>{{item[0]}}</td>
-      <td>{{item[1]}}</td>
+
+      <td><a href="{{ item[0] }}">{{ item[1] }}</a> </td>
 
       <td>{{item[2]}}</td>
-      <td>{{item[3]}}</td>
+
       <td>{{item[4]}}</td>
       <td>{{item[5]}}</td>
       <td>{{item[6]}}</td>
       <td>{{item[8]}}</td>
       <td>{{item[9]}}</td>
+      <td>{{item[11]}}</td>
+      <td><a href='{{ item[0] }}' class="btn btn-danger">Delete</a></td>
+
 
     </tr>
     {% endfor %}
 
   </table>
+
 
 </body>
 
