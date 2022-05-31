@@ -163,17 +163,17 @@ def user_confirm():
     return render_template('user_confirm.html', name=name, email=email, hashed_password=hashed_password, phone=phone, dob=dob, address=address, profile=profile, type=type)
 
 
-@app.route('/users/userlists')
-def user_list():
-
+@app.route("/users/userlists/")
+def user_lists():
+    users = []
     conn = mysql.connect()
     cursor = conn.cursor()
-
     cursor.execute("SELECT * FROM users")
-
-    data = cursor.fetchall()
-
-    return render_template('user_list.html', data=data)
+    for row in cursor.fetchall():
+        users.append({"id": row[0], "name": row[1],
+                     "email": row[2], "phone": row[4], "address": row[5], "dob": row[6], "created_at": row[8], "updated_at": row[9], "type": row[11]})
+    conn.close()
+    return render_template("user_list.html", users=users)
 
 
 @app.route('/users/<int:id>', methods=['GET', 'POST'])
@@ -248,43 +248,76 @@ def userup_confirm():
             "UPDATE users SET name = %s, email = %s, phone = %s,address = %s, dob = %s, type = %s WHERE id = %s", (name, email, phone, address, dob, type, id))
         conn.commit()
         conn.close()
-        return redirect(url_for('user_list'))
+        return redirect(url_for('user_lists'))
     return render_template('user_update_confirm.html', name=name, email=email, phone=phone, address=address, dob=dob, type=type, id=id)
 
 
-@app.route('/duser')
-def d_user():
-    return render_template('user_delete.html')
-
-
-@app.route('/users/deleteuser/<int:id>', methods=['GET', 'POST'])
+@app.route('/deleteuser/<int:id>')
 def deleteuser(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE id = %s", (id))
-    data = cursor.fetchall()
+    cursor.execute("DELETE FROM users WHERE id = %s", (id))
+    conn.commit()
     conn.close()
+    return redirect(url_for('user_lists'))
+
+
+@app.route('/posts/', methods=['GET', 'POST'])
+def post_create():
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
+        title = request.form.get('title')
+        desc = request.form.get('desc')
 
-        type = request.form.get('user')
-        phone = request.form.get('phone')
-        dob = request.form.get('dob')
-        address = request.form.get('address')
+        session['title'] = title
+        session['desc'] = desc
+        return redirect(url_for('postconfirm', title=title, desc=desc))
+    return render_template('post_create.html')
 
-        session["id"] = id
 
-        session["name"] = name
-        session["email"] = email
+@app.route('/posts/postconfirm/', methods=['GET', 'POST'])
+def postconfirm():
+    now = datetime.datetime.now()
+    title = session.get("title")
 
-        session["phone"] = phone
-        session["dob"] = dob
-        session["address"] = address
-        session["user"] = type
+    desc = session.get("desc")
 
-        return redirect(url_for('d_user'))
-    return render_template("user_delete.html", data=data)
+    if request.method == 'POST':
+
+        sql = "INSERT INTO posts(title,created_at,updated_at,description)VALUES(%s, %s, %s, %s)"
+        data = (title, now, now, desc)
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute(sql, data)
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+        return redirect(url_for('post_lists'))
+    return render_template('post_confirm.html', title=title, desc=desc)
+
+
+@app.route("/posts/postlists/")
+def post_lists():
+    posts = []
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM posts")
+    for row in cursor.fetchall():
+        posts.append({"id": row[0], "title": row[1],
+                     "status": row[2], "created_at": row[3], "updated_at": row[4], "description": row[5]})
+    conn.close()
+    return render_template("post_list.html", posts=posts)
+
+
+@app.route('/deletepost/<int:id>')
+def deletepost(id):
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM posts WHERE id = %s", (id))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('post_lists'))
 
 
 if __name__ == 'main':

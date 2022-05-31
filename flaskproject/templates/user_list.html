@@ -2,21 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>User lists </title>
+  <title>User lists</title>
 </head>
 
-
 <body>
-
   {% include 'navbar.html'%}
 
   <table class="table table-striped">
     <tr>
-
       <th scope="col">Name</th>
       <th scope="col">Email</th>
 
@@ -28,32 +25,23 @@
       <th scope="col">Type</th>
       <th scope="col">Delete</th>
     </tr>
-    {% for item in data%}
+    {% for user in users %}
 
     <tr>
+      <td><a href="{{ url_for('update_user',id=user.id) }}">{{ user.name }}</a></td>
 
+      <td>{{ user.email }}</td>
 
-      <td><a href="{{ item[0] }}">{{ item[1] }}</a> </td>
-
-      <td>{{item[2]}}</td>
-
-      <td>{{item[4]}}</td>
-      <td>{{item[5]}}</td>
-      <td>{{item[6]}}</td>
-      <td>{{item[8]}}</td>
-      <td>{{item[9]}}</td>
-      <td>{{item[11]}}</td>
-      <td><a href='{{ item[0] }}' class="btn btn-danger">Delete</a></td>
-
-
+      <td>{{user.phone}}</td>
+      <td>{{user.address}}</td>
+      <td>{{user.dob}}</td>
+      <td>{{user.created_at}}</td>
+      <td>{{user.updated_at}}</td>
+      <td>{{user.type}}</td>
+      <td><a href="{{ url_for('deleteuser',id=user.id) }}" class="btn btn-danger">Delete</a></td>
     </tr>
     {% endfor %}
-
   </table>
-
-
 </body>
-
-
 
 </html>
