@@ -11,9 +11,7 @@
       crossorigin="anonymous"
     />
 
-    <!-- Latest compiled and minified CSS -->
-
-    <title>User Confirm</title>
+    <title>Post Update Confirm</title>
   </head>
 
   <body>
@@ -58,44 +56,16 @@
         </ul>
       </div>
     </nav>
-    <h1>User Update Confirm</h1>
+
     <div class="container">
+      <h1>Post Update Confirm Page</h1>
       <form action="" method="POST" enctype="multipart/form-data">
         <p>
-          Name:
-          <label for=" name" class="label label-primary"> {{ name }} </label>
+          Title:
+          <label for="title" class="label"> {{ title }} </label>
         </p>
 
-        <p>
-          Email:<label for="email" class="label label-primary"
-            >{{ email }}
-          </label>
-        </p>
-
-        <p>
-          Type:<label for="type" class="label label-primary">{{ type }} </label>
-        </p>
-        <p>
-          Phone:<label for="phone" class="label label-primary"
-            >{{ phone }}
-          </label>
-        </p>
-
-        <p>
-          Date of Birth:<label for="dob" class="label label-primary"
-            >{{ dob }}
-          </label>
-        </p>
-
-        <p>
-          Address:<label for="address" class="label label-primary"
-            >{{ address }}
-          </label>
-        </p>
-
-        <!--{% if profile %}
-      <h1>some text <img src="{{ url_for('user_confirm', profile=profile) }}">more text!</h1>
-      {% endif %}-->
+        <p>Description:<label for="desc" class="label">{{ desc }} </label></p>
 
         <div class="row">
           <div class="column">
@@ -110,12 +80,7 @@
           </div>
           <div class="column">
             <div class="col-sm-offset-1 col-sm-10">
-              <a
-                href="{{ url_for('user_lists') }}"
-                class="btn btn-primary btn-md"
-                name="btn"
-                >Cancle</a
-              >
+              <a href="" class="btn btn-primary btn-md" name="btn">Cancle</a>
             </div>
           </div>
         </div>

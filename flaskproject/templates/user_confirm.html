@@ -1,68 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>User Confirm</title>
-  </head>
+  <title>User Confirm</title>
+</head>
 
-  <body>
-    {% include 'navbar.html'%}
-    <div class="container">
-      <form action="" method="POST" enctype="multipart/form-data">
-        <p>
-          Name:
-          <label for=" name" class="label label-primary"> {{ name }} </label>
-        </p>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">SCM Bulletin Board</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <p>
-          Email:<label for="email" class="label label-primary"
-            >{{ email }}
-          </label>
-        </p>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('user_lists') }}">Users List<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('users') }}">User </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('post_lists') }}">Posts List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('post_create') }}">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login_profile') }}">{{ session["emailemail"] }}</a>
+        </li>
 
-        <p>
-          Type:<label for="type" class="label label-primary">{{ type }} </label>
-        </p>
-        <p>
-          Phone:<label for="phone" class="label label-primary"
-            >{{ phone }}
-          </label>
-        </p>
 
-        <p>
-          Date of Birth:<label for="dob" class="label label-primary"
-            >{{ dob }}
-          </label>
-        </p>
 
-        <p>
-          Address:<label for="address" class="label label-primary"
-            >{{ address }}
-          </label>
-        </p>
+      </ul>
 
-        {% if profile %}
-        <h1>
-          some text
-          <img src="{{ url_for('user_confirm', profile=profile) }}" />more text!
-        </h1>
-        {% endif %}
-
-        <p><input type="submit" value="Confirm" /></p>
-      </form>
     </div>
-  </body>
+  </nav>
+  <div class="container">
+    <form action="" method="POST" enctype="multipart/form-data">
+      <p>
+        Name:
+        <label for=" name" class="label label-primary"> {{ name }} </label>
+      </p>
+
+      <p>
+        Email:<label for="email" class="label label-primary">{{ email }}
+        </label>
+      </p>
+
+      <p>
+        Type:<label for="type" class="label label-primary">{{ type }} </label>
+      </p>
+      <p>
+        Phone:<label for="phone" class="label label-primary">{{ phone }}
+        </label>
+      </p>
+
+      <p>
+        Date of Birth:<label for="dob" class="label label-primary">{{ dob }}
+        </label>
+      </p>
+
+      <p>
+        Address:<label for="address" class="label label-primary">{{ address }}
+        </label>
+      </p>
+
+      {% if profile %}
+      <h1>
+        some text
+        <img src="{{ url_for('user_confirm', profile=profile) }}" />more text!
+      </h1>
+      {% endif %}
+
+      <p><input type="submit" value="Confirm" /></p>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+
 </html>

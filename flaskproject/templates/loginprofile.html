@@ -6,36 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
-  <title>Post Create Page</title>
-  <style>
-    .column {
-      float: left;
-
-    }
-
-    /* Clear floats after the columns */
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
-    .btn {
-      margin-left: 20px;
-      margin-top: 10px;
-      cursor: pointer;
-
-    }
-
-    .container {
-      margin-bottom: 20px;
-    }
-  </style>
+  <title></title>
 </head>
 
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">SCM Bulletin Board</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,59 +30,51 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('post_create') }}">Posts</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login_profile') }}">{{ session["emailemail"] }}</a>
+          <a class="nav-link" href="">{{ session["emailemail"] }}</a>
         </li>
 
+
+
       </ul>
+
     </div>
   </nav>
   <div class="container">
-    <h1>Post Create</h1>
-    <br>
+    <h1>User Profile</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+      <p>
+        Name:
+        <label for=" name" class="label label-primary"> {{ account[1]}} </label>
+      </p>
 
-    <form action="" name="form" method="post" enctype="multipart/form-data" class="form-horizontal" id="form">
+      <p>
+        Email:<label for="email" class="label label-primary">{{ account[2]}}
+        </label>
+      </p>
 
-      <div class="form-group">
+      <p>
+        Type:<label for="type" class="label label-primary">{{ account[11]}} </label>
+      </p>
+      <p>
+        Phone:<label for="phone" class="label label-primary">{{ account[4] }}
+        </label>
+      </p>
 
-        <label class="col-sm-1">Title</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="title">
-        </div>
-      </div>
+      <p>
+        Date of Birth:<label for="dob" class="label label-primary">{{ account[6] }}
+        </label>
+      </p>
 
+      <p>
+        Address:<label for="address" class="label label-primary">{{ account[5] }}
+        </label>
+      </p>
+      <div>
 
-      <div class="form-group">
-        <label class="col-sm-1">Description</label>
-        <div class="col-sm-10">
-          <textarea class="form-control" rows="3" name="desc"></textarea>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="column">
-          <div class="col-sm-offset-1 col-sm-10">
-
-            <input type="submit" value="Confirm" class="btn btn-primary btn-md" name="btn">
-
-          </div>
-        </div>
-        <div class="column">
-          <div class="col-sm-offset-1 col-sm-10">
-
-            <input type="reset" value="Clear" class="btn btn-primary btn-md" name="btn">
-
-
-          </div>
-        </div>
+        <a href="{{ url_for('update_user',id=session['id']) }}" class="btn btn-primary">Edit</a>
 
       </div>
-
-
-
-
-
 
 
 
@@ -116,12 +82,10 @@
 
     </form>
   </div>
-
-
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+  </form>
 </body>
 
 </html>

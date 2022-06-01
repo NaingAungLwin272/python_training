@@ -1,3 +1,4 @@
+from werkzeug.routing import BaseConverter
 import os
 import pymysql
 from flask import Flask, flash, render_template, request, redirect, url_for, session
@@ -19,21 +20,28 @@ def login_post():
 
         email = request.form['email']
         password = request.form['password']
-
         conn = mysql.connect()
         cursor = conn.cursor()
+        cursor.execute(
+            'SELECT * FROM users WHERE email = %s AND password = %s', (email, password))
+        account = cursor.fetchone()
 
         if password == '' or email == '':
             loginerror = 'Input Can`t be blank'
         else:
 
-            cursor.execute(
-                'SELECT * FROM users WHERE email = %s AND password = %s', (email, password))
-            account = cursor.fetchone()
+            if account[11] == '1':
+                session["loggedin"] = True
+                session["ids"] = account[0]
+                session["emailemail"] = account[2]
 
-            if account:
+                return redirect(url_for('admin_dash'))
+            elif account[11] == '0':
+                session["loggedin"] = True
+                session["id"] = account[0]
+                session["emailemail"] = account[2]
 
-                return redirect(url_for('dashboard', account=account))
+                return redirect(url_for('user_dash'))
             else:
                 # Account doesnt exist or username/password incorrect
                 msg = 'Email or Password is Incorrect'
@@ -41,15 +49,42 @@ def login_post():
     return render_template('login.html', loginerror=loginerror, msg=msg)
 
 
-@app.route('/dashboard')
-def dashboard():
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+    session.pop('loggedin', None)
+    session.pop('ids', None)
+    session.pop('email', None)
+    # Redirect to login page
+    return redirect(url_for('login_post'))
 
-    return render_template('dashboard.html')
+
+@app.route('/userdash')
+def user_dash():
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('userdashboard.html', emails=session["emailemail"])
+
+    return redirect(url_for('login_post'))
 
 
-@app.route('/users/userpost')
-def user_post():
-    return render_template('user_post.html')
+@app.route('/admindash')
+def admin_dash():
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('admindashboard.html', emails=session["emailemail"])
+
+    return redirect(url_for('login_post'))
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def login_profile():
+
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE id = %s", (session["id"]))
+    account = cursor.fetchone()
+    return render_template('loginprofile.html', account=account)
 
 
 @ app.route('/users', methods=['POST', 'GET'])
@@ -159,7 +194,7 @@ def user_confirm():
         cursor.close()
         conn.close()
 
-        return redirect(url_for('user_list'))
+        return redirect(url_for('user_lists'))
     return render_template('user_confirm.html', name=name, email=email, hashed_password=hashed_password, phone=phone, dob=dob, address=address, profile=profile, type=type)
 
 
@@ -227,6 +262,11 @@ def update_user(id):
 
             return redirect(url_for('userup_confirm', name=name, email=email, dob=dob, address=address, type=type, phone=phone))
     return render_template("user_update.html", erroruser=erroruser, erroremail=erroremail, errorphone=errorphone, errordob=errordob, erroraddress=erroraddress, phoneerror=phoneerror, data=data)
+
+
+@app.route('/users/updatepassword', methods=['GET,POST'])
+def user_uppass():
+    return render_template('')
 
 
 @app.route('/users/userupdateconfirm/', methods=['GET', 'POST'])
@@ -299,6 +339,13 @@ def postconfirm():
 
 @app.route("/posts/postlists/")
 def post_lists():
+
+    search = request.args.get('search')
+    connect = mysql.connect()
+    cursors = connect.cursor()
+    cursors.execute(
+        "SELECT title,description FROM posts WHERE title LIKE %s OR description LIKE %s", (search, search))
+    data = cursors.fetchall()
     posts = []
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -307,7 +354,54 @@ def post_lists():
         posts.append({"id": row[0], "title": row[1],
                      "status": row[2], "created_at": row[3], "updated_at": row[4], "description": row[5]})
     conn.close()
-    return render_template("post_list.html", posts=posts)
+    return render_template("post_list.html", posts=posts, data=data)
+
+
+@app.route("/posts/<int:id>", methods=['GET', 'POST'])
+def postupdate(id):
+
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM posts WHERE id = %s", (id))
+    posts = cursor.fetchall()
+    conn.close()
+    if request.method == 'POST':
+        title = request.form.get('title')
+        desc = request.form.get('desc')
+
+        session["id"] = id
+        session['title'] = title
+        session['desc'] = desc
+
+        return redirect(url_for('postup_confirm', title=title, desc=desc))
+    return render_template("post_update.html", posts=posts)
+
+
+@app.route('/posts/postupdateconfirm/', methods=['GET', 'POST'])
+def postup_confirm():
+    id = session.get("id")
+    title = session.get("title")
+    desc = session.get("desc")
+
+    if request.method == 'POST':
+
+        conn = mysql.connect()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "UPDATE posts SET title = %s, description = %s WHERE id = %s", (title, desc, id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('post_lists'))
+    return render_template('post_update_confirm.html', title=title, desc=desc, id=id)
+
+
+# @app.route('/search', methods=['GET', 'POST'])
+# def post_search():
+#
+#    search = '%' + request.args.get('search') + '%'
+#
+#    return redirect(url_for('post_lists', data=data))
 
 
 @app.route('/deletepost/<int:id>')
